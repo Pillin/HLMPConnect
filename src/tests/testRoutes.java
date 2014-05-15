@@ -1,16 +1,13 @@
 package tests;
 
-import static org.junit.Assert.*;
+import junit.framework.TestCase;
 import hlmp.CommLayer.Configuration;
 import hlmp.CommLayer.NetUser;
 import hlmp.CommLayer.NetUserList;
 import hlmp.CommLayer.Router;
-import hlmp.CommLayer.Constants.MessageMetaType;
 import hlmp.CommLayer.Exceptions.ArgumentOutOfRangeException;
 import hlmp.CommLayer.Interfaces.RouterMessageErrorHandlerI;
 import hlmp.CommLayer.Messages.Message;
-import hlmp.CommLayer.Messages.MessageFactory;
-import hlmp.NetLayer.NetData;
 import hlmp.NetLayer.NetHandler;
 import hlmp.SubProtocol.Chat.Messages.ChatMessage;
 
@@ -20,38 +17,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
-public class testRoutes {
+public class testRoutes extends TestCase {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
+	protected void setUp() throws Exception {
+		super.setUp();
 	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
+	protected void tearDown() throws Exception {
+		super.tearDown();
 	}
 
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	@Test
 	public void test_send_message() throws ArgumentOutOfRangeException, InterruptedException, UnknownHostException {
 		Configuration configuration = new Configuration();
 		RouterMessageErrorHandlerI routerInformation = null;
 		
 		HashMap<Integer, Message> messageTypes= new HashMap<Integer, Message>();
 		messageTypes.put(hlmp.SubProtocol.Chat.Types.CHATMESSAGE, new ChatMessage());
-		NetData netData= new NetData();
+	//	NetData netData= new NetData();
 		ArrayList<NetUser> netUserList = new ArrayList<NetUser>();
 		netUserList.add(new NetUser(new UUID(1L, 0L), "user1", null, null, configuration.getNetData()));
 		netUserList.add(new NetUser(new UUID(2L,0L),"user2",null, null, configuration.getNetData()));
@@ -85,7 +68,7 @@ public class testRoutes {
 		userList.add(addr3, netUserList.get(2));
 		
 		
-		router.updateRouterTable(netHandler, netUserList.get(0), userList);
+		router.updateRouterTable(netHandler, netUserList.get(0), userList, "test");
 		router.proccessNotSentMessage();
 	}
 

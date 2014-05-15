@@ -19,8 +19,8 @@ public class UsersManager implements AddUserEventObserverI, RemoveUserEventObser
 	protected Handler mHandler;
 
 	public void refreshLocalUserEventUpdate(NetUser netUser) {
-//		String format = "REFRESH LOCAL USER: %s";
-//		Log.i(MSG_TAG, String.format(format, netUser.getName()));
+		String format = "REFRESH LOCAL USER: %s";
+		Log.i(MSG_TAG, String.format(format, netUser.getName()));
 		if (mHandler != null) {
 			this.mHandler.obtainMessage(UsersActivity.REFRESH_LOCAL_USERS, netUser.getName()).sendToTarget();
 		}
@@ -35,7 +35,7 @@ public class UsersManager implements AddUserEventObserverI, RemoveUserEventObser
 	}
 
 	public void removeUserEventUpdate(NetUser netUser) {
-		String format = "REMOVE USER: %s";
+		String format = "removeUserEventUpdate: REMOVE USER: %s";
 		Log.i(MSG_TAG, String.format(format, netUser.getName()));
 		if (mHandler != null) {
 			this.mHandler.obtainMessage(UsersActivity.REMOVE_USER, netUser.getName()).sendToTarget();
@@ -43,7 +43,7 @@ public class UsersManager implements AddUserEventObserverI, RemoveUserEventObser
 	}
 
 	public void addUserEventUpdate(NetUser netUser) {
-		String format = "ADD USER: %s";
+		String format = "addUserEventUpdate: ADD USER: %s";
 		Log.i(MSG_TAG, String.format(format, netUser.getName()));
 		if (mHandler != null) {
 			this.mHandler.obtainMessage(UsersActivity.ADD_USER, netUser.getName()).sendToTarget();
@@ -51,6 +51,7 @@ public class UsersManager implements AddUserEventObserverI, RemoveUserEventObser
 	}
 
 	public void setHandler(Handler mHandler) {
+		Log.i(MSG_TAG, String.format("setHandler:Handler: %s", mHandler));
 		this.mHandler = mHandler;
 	}
 }

@@ -8,7 +8,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Calendar;
 import java.util.Date;
-import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 
